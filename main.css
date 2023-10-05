@@ -1,0 +1,52 @@
+@charset "utf-8";
+@font-face {
+    font-family: 'float';
+    src: url('C:/xampp/htdocs/CDC/float-float-regular-400.ttf') format('truetype');
+}
+/* CSS Document */
+
+
+#header {
+	align-content: center;
+	font-size: 48px;
+	font-family: 'float';
+	font-weight: 700;
+	color: #7D26EE;
+}
+#submit {
+	background-color: #7D26EE;
+	font-size: 30px;
+	font-family: 'float';
+	transition-duration: 0.4s;
+	border: 3px solid black;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+    }
+
+#submit:hover {	
+	/* inverse button colors when hovered */
+	background-color: black;
+	color: #7D26EE;
+}
+#subheader {
+	font-size: 32px;
+	font-family: 'float';
+}
+
+#content {
+	font-size: 26px;
+	font-family: 'float';
+}
+
+body{
+	background-color: #E4C476;
+}
+
+input[type = "radio"] + label {
+	cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #7D26EE; 
+}

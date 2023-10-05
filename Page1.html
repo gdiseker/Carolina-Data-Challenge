@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Playlist_Form</title>
+<link type="text/css" rel="stylesheet" href="Main.css">
+</head>
+
+<body>
+<div id="header" align="center">
+	<p>NOSTALGIC PLAYLIST GENERATOR
+	</p>
+</div>
+	
+	<div id="subheader" align = "center"><p>Complete the survey below to generate <br> a perfect playlist for your next party!</p>
+	</div>
+<div id="content">
+	<table id="survey_table" align="center" width = "75%">
+		<tbody>
+		<tr>
+			<td width = "30%" align = "left">How much do you want people to be hitting the dance floor?</td> 
+		  <td align = "center"><label>
+		    <input type="radio" name="danceability_options" value="1">
+			    1</label>
+				<label><input type="radio" name="danceability_options" value="2">2</label>
+				<label><input type="radio" name="danceability_options" value="3">3</label>
+				<label><input type="radio" name="danceability_options" value="4">4</label>
+				<label><input type="radio" name="danceability_options" value="5">
+				5 </label></td> 
+			</tr>
+		
+		<tr>
+			<td width = "30%" align = "left">How loud do you want your music?</td> 
+			<td align = "center"><label>
+			  <input type="radio" name="loudness_options" value="1">1</label>
+				<label><input type="radio" name="loudness_options" value="2">2</label>
+				<label><input type="radio" name="loudness_options" value="3">3</label>
+				<label><input type="radio" name="loudness_options" value="4">4</label>
+				<label><input type="radio" name="loudness_options" value="5">
+				5 </label></td> 
+		</tr>
+			
+		<tr>
+			<td width = "30%" align = "left">What is the overall vibe of your party?</td> 
+			<td align = "center"><label>
+			  <input type="radio" name="valence_options" value="1">1</label>
+				<label><input type="radio" name="valence_options" value="2">2</label>
+				<label><input type="radio" name="valence_options" value="3">3</label>
+				<label><input type="radio" name="valence_options" value="4">4</label>
+				<label><input type="radio" name="valence_options" value="5">
+				5 </label></td> 
+		</tr>
+			
+		<tr>
+			<td width = "30%" align = "left">How lively will your party be?</td> 
+			<td align = "center"><label>
+			    <input type="radio" name="energy_options" value="1">1</label>
+				<label><input type="radio" name="energy_options" value="2">2</label>
+				<label><input type="radio" name="energy_options" value="3">3</label>
+				<label><input type="radio" name="energy_options" value="4">4</label>
+				<label><input type="radio" name="energy_options" value="5">5</label></td> 
+		</tr>
+			
+		<tr>
+			<td width = "30%" align = "left">How much emphasis on lyrics should your playlist have?</td> 
+			<td align = "center"><label>
+			  <input type="radio" name="speechiness_options" value="1">1</label>
+				<label><input type="radio" name="speechiness_options" value="2">2</label>
+				<label><input type="radio" name="speechiness_options" value="3">3</label>
+				<label><input type="radio" name="speechiness_options" value="4">4</label>
+				<label><input type="radio" name="speechiness_options" value="5">
+				5</label></td> 
+		</tr>
+			
+		</tbody>
+	</table>
+	
+</div>
+	
+	<button type = "button" id="submit" align="center">Generate Playlist</button>
+	
+<script> //used chatgpt to help write javascript
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('submit').addEventListener('click', function () {
+	console.log('Button clicked');  
+    const selectedValues = {};
+
+    const radioGroupNames = ["danceability_options", "loudness_options", "valence_options", "energy_options", "speechiness_options"];
+
+    for (const groupName of radioGroupNames) {
+        const selectedValue = document.querySelector(`input[name="${groupName}"]:checked`);
+
+        if (selectedValue) {
+            selectedValues[groupName] = selectedValue.value;
+        } else {
+            alert(`Please select a ${groupName.replace("_", " ")} option.`);
+            return; // Exit the loop if any group is not selected
+        }
+    }
+
+    // Send the selected values to the Python script using fetch
+    fetch('http://localhost:5000/script', { // Replace with the correct path
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(selectedValues)
+    }).then(response => {
+        if (response.ok) {
+            console.log('Data sent successfully.');
+        } else {
+            console.error('Error sending data.');
+        }
+    });
+});
+});
+</script>
+</body>
+</html>
+
+
+
